@@ -1,0 +1,231 @@
+$colors: (
+    backgroundColor: #f5f5f5,
+    primary: #ffffff,
+    secondary: #487eb0,
+    textColor: #333333,
+    placeholderColor: #22222270,
+    hoverColor: #c23616
+);
+
+@function color($colorName) {
+    @return map-get($colors, $colorName); 
+}
+
+// Variables
+$center: translate(-50%, -50%);
+$mainFont: "Paytone One";
+$textFont: "Raleway Regular";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: color(backgroundColor);
+
+    .container {
+        width: 900px;
+        height: 500px;
+        padding: 10px;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: $center;
+        
+        background-color: color(primary);
+
+        border-radius: 10px;
+        box-shadow: 0px 10px 10px rgba(0,0,0,0.15);
+
+        a {
+            text-decoration: none;
+            color: color(placeholderColor);
+            font-family: "Raleway Medium";
+            transition: 0.15s ease;
+        }
+
+        a:hover {
+            color: color(hoverColor);
+        }
+    }
+
+    // City basic info
+    .city-basic {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        * {
+            margin: 5px 0;
+        }
+    }
+
+    // Buttons
+    .buttons {
+        display: flex;
+        justify-content: center;
+        margin: 30px 0;
+
+        button {
+            border-radius: 1px;
+            border: 1px solid rgba(0,0,0,0.15);
+            padding: 5px;
+            margin: 0 3px;
+            background-color: color(primary);
+            color: color(textColor);
+            font-family: "Raleway Medium";
+            cursor: pointer;
+            outline: none;
+            transition: 0.2s ease;
+        }
+        button:hover {
+            background-color: color(secondary);
+            color: color(primary);
+        }
+    }
+
+    #about {
+        position: absolute;
+        right: 15px;
+        bottom: 10px;
+    }
+}
+
+// Header
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .title {
+        text-align: center;
+
+        h1 {
+            color: color(secondary);
+            font-family: $mainFont;
+            font-size: 50px;
+        }
+
+        p {
+            color: color(placeholderColor);
+            font-family: $textFont;
+        }
+    }
+
+    .languages {
+        align-self: flex-start;
+    }
+
+    .github {
+        text-align: center;
+        p {
+            margin: 5px 0;
+            font-family: $textFont;
+        }
+    }
+}
+
+// Search field
+.search-bar {
+    width: 450px;
+    margin: 0 auto;
+
+    #form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        
+        input{
+            opacity: 0;
+            width: 0px;
+            padding: 0px;
+            margin: 15px 0;
+            border-radius: 20px;
+            border: 1px solid rgba(0,0,0,0.2);
+            font-family: "Raleway Medium";
+            outline: none;
+            transition: 0.4s ease;
+        }
+
+        input.inputActive {
+            opacity: 1;
+            width: 450px;
+            padding: 8px;
+        }
+
+        input::placeholder {
+            font-family: $textFont;
+            color: color(placeholderColor);
+        }
+
+        #search-icon {
+            position: absolute;
+            right: 45%;
+            font-size: 40px;
+            color: color(textColor);
+            transform:rotateZ(90deg);
+            cursor: pointer;
+            transition: 0.4s ease;
+        }
+
+        #search-icon.activeSearchIcon {
+            color: color(placeholderColor);
+            font-size: 25px;
+            right: 5px;
+            transform: rotateZ(0deg);
+        }
+
+
+    }
+}
+
+// Weather data
+.weather-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    text-align: center;
+
+    .weather-data_current {
+        font-family: "Raleway Medium";
+        color: #555555;
+
+        .numerals {
+            font-family: "Raleway Medium";
+            font-size: 20px;
+            color: color(secondary);
+        }
+    }
+}
+
+// Material icons support
+.material-icons {
+	font-family: 'Material Icons';
+	font-weight: normal;
+	font-style: normal;
+	font-size: 24px;  /* Preferred icon size */
+	display: inline-block;
+	line-height: 1;
+	text-transform: none;
+	letter-spacing: normal;
+	word-wrap: normal;
+	white-space: nowrap;
+	direction: ltr;
+  
+	/* Support for all WebKit browsers. */
+	-webkit-font-smoothing: antialiased;
+	/* Support for Safari and Chrome. */
+	text-rendering: optimizeLegibility;
+  
+	/* Support for Firefox. */
+	-moz-osx-font-smoothing: grayscale;
+  
+	/* Support for IE. */
+	font-feature-settings: 'liga';
+  }
