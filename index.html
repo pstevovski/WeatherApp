@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WeatherApp</title>
+    <link rel="stylesheet" href="static/css/main.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <!-- Languages -->
+            <div class="languages">
+                <a href="#">MK</a>
+                <span>|</span>
+                <a href="#">EN</a>
+            </div>
+            <!-- Title -->
+            <div class="title">
+                <h1>Weather App</h1>
+                <p>the weather app you need</p>
+            </div>
+            <!-- GitHub link -->
+            <div class="github">
+                <a href="https://github.com/pecko95/WeatherApp" target="_blank"><img src="static/images/github-logo.png" alt="GitHub" width="30px" height="30px"></a>
+                <p>GitHub</p>
+            </div>
+        </header>
+
+        <!-- Form field -->
+        <div class="search-bar">
+            <form id="form">
+                <input type="text" id="inputField" placeholder="Enter city name" autocomplete="off">
+                <i id="search-icon" class="material-icons">search</i>
+            </form>
+        </div>
+
+        <!-- City/state name and weather icon -->
+        <div class="city-basic">
+            <p>Skopje, Macedonia</p>
+            <img src="static/images/github-logo.png" width="30px" height="30px">
+        </div>
+
+        <!-- Current weather data -->
+        <div class="weather-data">
+            <div class="weather-data_current">
+                <p>Current temperature: <span class="numerals">10 °C</span></p>
+                <p>Min. temperature: <span class="numerals">-2 °C</span></p>
+                <p>Max. temperature: <span class="numerals">13 °C</span></p>
+                <p>Preassure: <span class="numerals">10</span></p>
+                <p>Humidity: <span class="numerals">40%</span></p>
+                <p>Wind speed: <span class="numerals">15 km/h</span></p>
+            </div>
+            <!-- Forecast -->
+            <!-- <div class="weather-data_forecast">
+                <div class="forecast-container">
+                    <div class="forecast-box">
+                        <p>SUN</p>
+                        <p>Temperature: 25 C</p>
+                        <p>Humidity: 30%</p>
+                        <p>Wind speed: 15km/h</p>
+                        <p>Monday</p>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+
+        <!-- Buttons -->
+        <div class="buttons">
+            <button id="current">CURRENT</button>
+            <button id="forecast">FORECAST</button>
+        </div>
+
+        <a href="#" id="about">about</a>
+
+    </div>
+
+    <script src="static/js/app.js"></script>
+</body>
+</html>
