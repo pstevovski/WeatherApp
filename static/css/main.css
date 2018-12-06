@@ -131,7 +131,9 @@ body .bottom {
           align-items: center;
 }
 
-body .bottom .languages {
+body .bottom .units {
+  font-size: 18px;
+  cursor: pointer;
   position: absolute;
   left: 15px;
   top: 10px;
