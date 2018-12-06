@@ -7,6 +7,7 @@
 
 body {
   background-color: #f5f5f5;
+  /* Spinner */
 }
 
 body .container {
@@ -74,17 +75,33 @@ body .city-basic {
 
 body .city-basic #name {
   font-family: "Raleway Medium";
-  font-size: 20px;
+  font-size: 22px;
+  color: #00827c;
 }
 
 body .city-basic * {
   margin: 5px 0;
 }
 
+body .city-basic img {
+  padding: 0;
+  margin: 0;
+}
+
 body .city-basic #weather_desc {
   font-family: "Raleway Medium";
   font-size: 20px;
   margin: 0px;
+  color: #487eb0;
+}
+
+body .spinner {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 body .buttons {
@@ -93,6 +110,7 @@ body .buttons {
       -ms-flex-pack: center;
           justify-content: center;
   margin: 30px 0;
+  z-index: 3;
 }
 
 body .buttons button {
@@ -119,7 +137,87 @@ body .buttons .activeButton {
   color: #ffffff;
 }
 
+body .units {
+  display: none;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+body .units .activeUnit {
+  color: #c23616;
+}
+
+body .units span {
+  color: rgba(0, 0, 0, 0.3);
+}
+
 body .bottom {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 60px 1fr 60px;
+      grid-template-columns: 60px 1fr 60px;
+      grid-template-areas: "githubSection errorSection aboutSection";
+  z-index: -1;
+  width: 98%;
+  position: absolute;
+  bottom: 0;
+}
+
+body .bottom .github {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: githubSection;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+}
+
+body .bottom .github p {
+  margin: 5px 0;
+  font-family: "Raleway Regular";
+}
+
+body .bottom .error {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: errorSection;
+  display: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body .bottom .error i {
+  font-size: 35px;
+  color: #e1302a;
+}
+
+body .bottom .error p {
+  margin-left: 5px;
+  font-family: "Raleway Medium";
+  font-size: 14px;
+  color: #22222270;
+}
+
+body .bottom #about {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: aboutSection;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -131,30 +229,19 @@ body .bottom {
           align-items: center;
 }
 
-body .bottom .units {
-  font-size: 18px;
-  cursor: pointer;
-  position: absolute;
-  left: 15px;
-  top: 10px;
-}
-
-body .bottom .github {
-  position: absolute;
-  left: 20px;
-  bottom: 5px;
-  text-align: center;
-}
-
-body .bottom .github p {
-  margin: 5px 0;
-  font-family: "Raleway Regular";
-}
-
-body .bottom #about {
-  position: absolute;
-  right: 15px;
-  bottom: 10px;
+@media (max-width: 600px) {
+  body .bottom {
+    position: relative;
+    margin-top: 30px;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+        grid-template-areas: "errorSection" "githubSection" "aboutSection";
+  }
+  body .bottom * {
+    margin: 5px 0;
+  }
 }
 
 header {
@@ -351,7 +438,7 @@ header .title p {
 }
 
 .weather-data .forecast-container .forecast-box .forecast-data {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .weather-data .forecast-container .forecast-box .forecast-data p {
@@ -363,6 +450,11 @@ header .title p {
   font-family: "Raleway Black";
   font-size: 22px;
   color: #00827c;
+}
+
+.weather-data .forecast-container .forecast-box .forecast-data #day-date {
+  font-size: 14px;
+  color: #22222270;
 }
 
 @media (max-width: 920px) {
@@ -450,6 +542,28 @@ header .title p {
   }
   100% {
     opacity: 1;
+  }
+}
+
+@-webkit-keyframes spinner {
+  from {
+    -webkit-transform: translate(-50%, -50%) rotate(0deg);
+            transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    -webkit-transform: translate(-50%, -50%) rotate(360deg);
+            transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes spinner {
+  from {
+    -webkit-transform: translate(-50%, -50%) rotate(0deg);
+            transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    -webkit-transform: translate(-50%, -50%) rotate(360deg);
+            transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 /*# sourceMappingURL=main.css.map */

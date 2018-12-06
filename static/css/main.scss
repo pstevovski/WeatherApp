@@ -6,6 +6,7 @@ $colors: (
     placeholderColor: #22222270,
     hoverColor: #c23616,
     dayColor: #00827c,
+    errorColor: #e1302a
 );
 
 @function color($colorName) {
@@ -25,6 +26,7 @@ $textFont: "Raleway Regular";
 
 $smallerScreen: 920px;
 $mobile: 500px;
+$midScreen: 600px;
 
 @mixin smallerScreen {
     @media (max-width: #{$smallerScreen}) {
@@ -34,6 +36,12 @@ $mobile: 500px;
 
 @mixin mobile {
     @media (max-width: #{$mobile}) {
+        @content;
+    }
+}
+
+@mixin midScreen {
+    @media (max-width: #{$midScreen}) {
         @content;
     }
 }
@@ -97,11 +105,17 @@ body {
 
         #name {
             font-family: "Raleway Medium";
-            font-size: 20px;
+            font-size: 22px;
+            color: color(dayColor);
         }
 
         * {
             margin: 5px 0;
+        }
+
+        img {
+            padding: 0;
+            margin: 0;
         }
 
 
@@ -109,14 +123,41 @@ body {
             font-family: "Raleway Medium";
             font-size: 20px;
             margin: 0px;
+            color: color(secondary);
          }
     }
+
+    /* Spinner */
+    .spinner {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    // .spinner:before{
+    //     content: '';
+    //     box-sizing: border-box;
+    //     position: absolute;
+    //     top: 50%;
+    //     left: 50%;
+    //     transform:translate(-50%,-50%);
+    //     height:25px;
+    //     width: 25px;
+    //     border-radius: 50%;
+    //     margin-top: -20px;
+    //     border: 2px solid transparent;
+    //     border-top-color: #e1302a;
+    //     border-bottom-color: #2f3640;
+    //     animation: spinner 0.5s ease infinite;
+    // }
 
     // Buttons
     .buttons {
         display: none;
         justify-content: center;
         margin: 30px 0;
+        z-index: 3;
 
         button {
             border-radius: 1px;
@@ -141,34 +182,87 @@ body {
         }
     }
 
-    .bottom{
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .units {
+        display: none;
+        font-size: 18px;
+        cursor: pointer;
+        margin: 10px 0;
 
-        .units {
-            font-size: 18px;
-            cursor: pointer;
-            position: absolute;
-            left: 15px;
-            top: 10px;
+        .activeUnit {
+            color: color(hoverColor);
         }
+
+        span{
+            color: rgba(0,0,0,0.3);
+        }
+    }
+
+    .bottom{
+        display: grid;
+        grid-template-columns: 60px 1fr 60px;
+        grid-template-areas: "githubSection errorSection aboutSection";
+        z-index: -1;
+
+        width: 98%;
+        position: absolute;
+        bottom: 0;
     
         .github {
-            position: absolute;
-            left: 20px;
-            bottom: 5px;
+            grid-area: githubSection;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
             text-align: center;
+
             p {
                 margin: 5px 0;
                 font-family: $textFont;
             }
         }
+
+        .error {
+            grid-area: errorSection;
+            display: none;
+            justify-content: center;
+            align-items: center;
+
+            i {
+                font-size: 35px;
+                color:color(errorColor);
+            }
+
+            p {
+                margin-left: 5px;
+                font-family: "Raleway Medium";
+                font-size: 14px;
+                color: color(placeholderColor);
+            }
+        }
         
         #about {
-            position: absolute;
-            right: 15px;
-            bottom: 10px;
+            grid-area: aboutSection;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @include midScreen {
+            position: relative;
+            // bottom: -3000px;
+            margin-top: 30px;
+
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-areas:
+            "errorSection"
+            "githubSection"
+            "aboutSection";
+
+            * {
+                margin: 5px 0;
+            }
         }
     }
 }
@@ -210,6 +304,7 @@ header {
 .search-bar {
     max-width: 450px;
     margin: 0 auto;
+    // background-color: red;
 
     #form {
         display: flex;
@@ -303,7 +398,7 @@ header {
             align-items: center;
 
             .forecast-data {
-                font-size: 14px;
+                font-size: 12px;
 
                 p {
                     margin: 5px 0;
@@ -315,6 +410,11 @@ header {
                     font-family: "Raleway Black";
                     font-size: 22px;
                     color: color(dayColor);
+                }
+
+                #day-date {
+                    font-size: 14px;
+                    color: color(placeholderColor);
                 }
             }
 
@@ -383,5 +483,14 @@ header {
     }
     100%{
         opacity: 1;
+    }
+}
+
+@keyframes spinner{
+    from{
+        transform:translate(-50%,-50%) rotate(0deg);
+    }
+    to{
+        transform:translate(-50%,-50%) rotate(360deg);
     }
 }
