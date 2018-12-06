@@ -14,6 +14,11 @@
             <div class="title">
                 <h1>Weather App</h1>
                 <p>the weather app you need</p>
+                <div class="units">
+                    <a class="activeUnit" id="celsius">°C</a>
+                    <span>|</span>
+                    <a id="fahrenheit">°F</a>
+                </div>
             </div>
         </header>
 
@@ -32,6 +37,11 @@
             <p id="weather_desc"></p>
         </div>
 
+        <!-- Spinner while loading data -->
+        <div class="spinner">
+            <img src="static/images/thunder.svg" alt="" width="100px" height="100px">
+        </div>
+
         <!-- Current weather data -->
         <div class="weather-data" id="weather-data"></div>
 
@@ -42,17 +52,18 @@
         </div>
 
         <div class="bottom">
-            <!-- Units -->
-            <div class="units">
-                <a id="celsius">°C</a>
-                <span>|</span>
-                <a id="fahrenheit">°F</a>
-            </div>
             <!-- GitHub link -->
             <div class="github">
                 <a href="https://github.com/pecko95/WeatherApp" target="_blank"><img src="static/images/github.svg" alt="GitHub" width="25px" height="25px"></a>
                 <p>GitHub</p>
             </div>
+
+            <!-- Error notification -->
+            <div class="error">
+                <i class="material-icons">warning</i>
+                <p>Please enter a city name in the search field.</p>
+            </div>
+
             <a href="#" id="about">about</a>
             <!-- CREDITS -->
             <!-- https://www.amcharts.com/free-animated-svg-weather-icons/ -->
