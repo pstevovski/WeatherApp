@@ -24,6 +24,7 @@ form.addEventListener("submit", e => {
 // Get current weather
 function current(city) {
     weather.getCurrent(city).then(data => {
+        // Display current weather data
         ui.displayData(data);
 
         // Get custom weather icon
@@ -42,24 +43,69 @@ forecastBtn.addEventListener("click", ()=>{
         alert("Enter city name");
     } else {
         weather.getForecast(city).then(forecast => {
+            // Display forecast data for the next 5 days
             ui.displayForecast(forecast);
-            // console.log(forecast);
         })
+
+        // Mark the active button
+        forecastBtn.classList.add("activeButton");
+        currentBtn.classList.remove("activeButton");
     }
+
 })
 
 // Get the current weather again (after clicking forecast)
 currentBtn.addEventListener("click", ()=>{
     const city = inputField.value;
+
     if(!city) {
         alert("Enter city name");
     } else {
+        current(city);
+
+        // Mark the active button
+        currentBtn.classList.add("activeButton");
+        forecastBtn.classList.remove("activeButton");
+    }
+})
+
+// Metric units
+document.querySelector("#celsius").addEventListener("click", ()=>{
+    const city = inputField.value;
+    const celsius = "°C";
+
+    if(!city) {
+        alert("Enter city name");
+    } else {
+        weather.units = "metric";
+
+        ui.changeSign(celsius);
+    
+        // Call current weather data
+        current(city);
+    }
+})
+
+// Imperial units
+document.querySelector("#fahrenheit").addEventListener("click", ()=>{
+    const city = inputField.value;
+    const fahrenheit = "°F";
+
+    if(!city) {
+        alert("Enter city name");
+    } else {
+        weather.units = "imperial"
+
+        ui.changeSign(fahrenheit);
+
+        // Call current weather data
         current(city);
     }
 })
 
 /* 
 Add: 
--Celsius / Fahrenheit - option to choose between the two for the user;
--Language MK / EN (?);
+- Add an error notification if user hasn't entered a city name
+- Translate the forecast date into a week's day
+- Add an icon in the title
 */

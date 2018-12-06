@@ -5,7 +5,13 @@ class UI {
         this.name = document.querySelector("#name");
         this.weather_icon = document.querySelector("#weather_icon");
         this.weather_desc = document.querySelector("#weather_desc");
+        this.sign = "°C";
     }
+    // Change sign - celsius or fahrenheit
+    changeSign(sign) {
+        this.sign = sign;
+    }
+
     // Display city's current weather data
     displayData(data){
         // Display city and state name
@@ -22,9 +28,9 @@ class UI {
 
         this.weather.innerHTML = `
         <div class="weather-data_current">
-            <p>Current temperature: <span class="numerals">${temp} °C</span></p>
-            <p>Min. temperature: <span class="numerals">${temp_min} °C</span></p>
-            <p>Max. temperature: <span class="numerals">${temp_max} °C</span></p>
+            <p>Current temperature: <span class="numerals">${temp} ${this.sign}</span></p>
+            <p>Min. temperature: <span class="numerals">${temp_min} ${this.sign}</span></p>
+            <p>Max. temperature: <span class="numerals">${temp_max} ${this.sign}</span></p>
             <p>Atmospheric preassure: <span class="numerals">${data.main.pressure} mbar </span></p>
             <p>Humidity: <span class="numerals">${data.main.humidity} %</span></p>
             <p>Wind speed: <span class="numerals">${windSpeed} km/h</span></p>
@@ -182,7 +188,7 @@ class UI {
             <div class="forecast-box">
             <img src=${iconSource} width="100px" height="100px">
             <div class="forecast-data">
-                <p>Temperature: ${temp} °C</p>
+                <p>Temperature: ${temp} ${this.sign}</p>
                 <p>Humidity: ${forecast.list[i].main.humidity} %</p>
                 <p>Wind speed: ${windSpeed} km/h</p>
                 <p id="day">Monday</p>
