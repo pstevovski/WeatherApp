@@ -18,6 +18,7 @@ class UI {
         const temp = Math.floor(data.main.temp);
         const temp_min = Math.floor(data.main.temp_min);
         const temp_max = Math.floor(data.main.temp_max);
+        const windSpeed = Math.floor(data.wind.speed);
 
         this.weather.innerHTML = `
         <div class="weather-data_current">
@@ -26,10 +27,14 @@ class UI {
             <p>Max. temperature: <span class="numerals">${temp_max} °C</span></p>
             <p>Atmospheric preassure: <span class="numerals">${data.main.pressure} mbar </span></p>
             <p>Humidity: <span class="numerals">${data.main.humidity} %</span></p>
-            <p>Wind speed: <span class="numerals">${data.wind.speed} km/h</span></p>
+            <p>Wind speed: <span class="numerals">${windSpeed} km/h</span></p>
             <p>Visibility: <span class="numerals">${data.visibility} m</span></p>
         </div>
         `;
+
+        setTimeout(() => {
+            document.querySelector(".weather-data_current").classList.add("activeCurrent");
+        }, 50);
     }
 
     // Weather icon
@@ -94,21 +99,99 @@ class UI {
 
     // Display forecast
     displayForecast(forecast) {
+        // Clear current weather description
+        this.weather_desc.textContent = "";
+
+        // Clear current weather icon
+        this.weather_icon.setAttribute("src", "");
+        this.weather_icon.setAttribute("width", "");
+        this.weather_icon.setAttribute("height", "");
+
+        // Generate output
         let output = `
             <div class="forecast-container">
         `;
+
+        setTimeout(() => {
+            document.querySelector(".forecast-container").classList.add("activeForecast");            
+        }, 50);
+
+        // Init iconSource
+        let iconSource;
+        
         for(let i = 7; i < forecast.list.length; i += 7) {
+
+            // Floor the temperature to a whole number
+            const temp = Math.floor(forecast.list[i].main.temp);
+            const windSpeed = Math.floor(forecast.list[i].wind.speed);
+
+            // Display forecast weather icon
+            const iconId = forecast.list[i].weather[0].id;
+
+            // Check if the icon name ends with d => day or n => night
+            const icon = forecast.list[i].weather[0].icon.endsWith("n") ? "night" : "day";
+
+            // Get the icon's id first number
+            const fNum = parseInt(iconId.toString()[0]);
+
+            switch(fNum) {
+                // Thunderstorm icon
+                case 2:
+                    iconSource = "static/images/thunder.svg";
+                    break;
+                // Drizzle (light rain) icon
+                case 3:
+                    iconSource ="static/images/rainy-4.svg";
+                    break;
+                // Rain icon
+                case 5:
+                    iconSource ="static/images/rainy-6.svg";
+                    break;
+                // Snow icon
+                case 6:
+                    iconSource ="static/images/snowy-6.svg";
+                    break;
+                // Atmoshpere icon
+                case 7:
+                    iconSource ="static/images/mist.svg";
+                    break;
+            }
+
+            // If its clear skies
+            if(iconId === 800) {
+                if(icon === "day") {
+                    iconSource ="static/images/day.svg";
+                } else if(icon === "night") {
+                    iconSource ="static/images/night.svg";
+                };
+            }
+
+            // If there are "few clouds"
+            if(iconId === 801) {
+                if(icon === "day") {
+                    iconSource ="static/images/cloudy-day-3.svg"
+                } else if(icon === "night") {
+                    iconSource ="static/images/cloudy-night-3.svg";
+                };
+            } else if(iconId === 802 || iconId === 803 || iconId === 804) {
+                // If its overcast or cloudy
+                iconSource ="static/images/cloudy.svg";
+            }
+
             output += `
             <div class="forecast-box">
-                <p>SUN</p>
-                <div class="forecast-data">
-                    <p>Temperature: ${forecast.list[i].main.temp} C</p>
-                    <p>Humidity: ${forecast.list[i].main.humidity} %</p>
-                    <p>Wind speed: ${forecast.list[i].wind.speed} km/h</p>
-                    <p>Monday</p>
-                </div>
+            <img src=${iconSource} width="100px" height="100px">
+            <div class="forecast-data">
+                <p>Temperature: ${temp} °C</p>
+                <p>Humidity: ${forecast.list[i].main.humidity} %</p>
+                <p>Wind speed: ${windSpeed} km/h</p>
+                <p id="day">Monday</p>
+            </div>
             </div>`;
-        }`</div>`;
+        }`
+        </div>`;
+
+        // Append the generated output to the weather container
         this.weather.innerHTML = output;
     }
 }
