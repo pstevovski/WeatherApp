@@ -5,7 +5,7 @@ $colors: (
     textColor: #333333,
     placeholderColor: #22222270,
     hoverColor: #c23616,
-    boxesColor: #273c75,
+    dayColor: #00827c,
 );
 
 @function color($colorName) {
@@ -74,7 +74,7 @@ body {
                 height: 6px;
             }
             ::-webkit-scrollbar-thumb {
-                background: transparent;
+                background: color(secondary);
                 border-radius: 1px;
             }
         }
@@ -95,9 +95,21 @@ body {
         align-items: center;
         text-align: center;
 
+        #name {
+            font-family: "Raleway Medium";
+            font-size: 20px;
+        }
+
         * {
             margin: 5px 0;
         }
+
+
+        #weather_desc {
+            font-family: "Raleway Medium";
+            font-size: 20px;
+            margin: 0px;
+         }
     }
 
     // Buttons
@@ -137,10 +149,13 @@ body {
         .languages {
             position: absolute;
             left: 15px;
-            bottom: 10px;
+            top: 10px;
         }
     
         .github {
+            position: absolute;
+            left: 20px;
+            bottom: 5px;
             text-align: center;
             p {
                 margin: 5px 0;
@@ -244,6 +259,8 @@ header {
         align-items: center;
         flex-direction: column;
         flex-wrap: wrap;
+        opacity: 0;
+        transition: 0.7s ease;
 
         font-family: "Raleway Medium";
         color: #555555;
@@ -262,28 +279,67 @@ header {
         display: flex;
         justify-content: center;
         align-items: center;
-        // flex-wrap: wrap;
+
+        opacity: 1;
+        transition: 1s ease;
         
         .forecast-box {
+            opacity: 0;
             padding: 10px;
-            background-color: rgba(0,0,0,0.8);
-            color: color(primary);
+            color: color(secondary);
+            border-radius: 2px;
             flex-basis: 20%;
             min-height: 200px;
-            margin: 0 0.5px;
+            margin: 0px;
+            animation: testBox 0.3s ease-in-out forwards;
+            transition: 0.3s ease;
+            cursor: pointer;
 
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
 
+            .forecast-data {
+                font-size: 14px;
+
+                p {
+                    margin: 5px 0;
+                    font-family: "Raleway Medium";
+
+                }
+
+                #day {
+                    font-family: "Raleway Black";
+                    font-size: 22px;
+                    color: color(dayColor);
+                }
+            }
+
             @include smallerScreen {
                 width: 250px;
             }
         }
-        .forecast-box:nth-child(1) {
-            background-color:color(boxesColor);
+        .forecast-box:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 6px 10px rgba(0,0,0,0.15);
         }
+        .forecast-box:nth-child(2){
+            animation-delay: 0.3s;
+        }
+        .forecast-box:nth-child(3){
+            animation-delay: 0.6s;
+        }
+        .forecast-box:nth-child(4){
+            animation-delay: 0.9s;
+        }
+        .forecast-box:nth-child(5){
+            animation-delay: 1.2s;
+        }
+    }
+
+    .weather-data_current.activeCurrent {
+        opacity: 1;
     }
 
     @include smallerScreen{
@@ -294,26 +350,36 @@ header {
 
 // Material icons support
 .material-icons {
-	font-family: 'Material Icons';
-	font-weight: normal;
-	font-style: normal;
-	font-size: 24px;  /* Preferred icon size */
-	display: inline-block;
-	line-height: 1;
-	text-transform: none;
-	letter-spacing: normal;
-	word-wrap: normal;
-	white-space: nowrap;
-	direction: ltr;
-  
-	/* Support for all WebKit browsers. */
-	-webkit-font-smoothing: antialiased;
-	/* Support for Safari and Chrome. */
-	text-rendering: optimizeLegibility;
-  
-	/* Support for Firefox. */
-	-moz-osx-font-smoothing: grayscale;
-  
-	/* Support for IE. */
-	font-feature-settings: 'liga';
-  }
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+// Forecast boxes animation
+@keyframes testBox{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}

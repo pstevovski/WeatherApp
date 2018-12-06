@@ -43,7 +43,7 @@ body .container a:hover {
     height: 6px;
   }
   body .container ::-webkit-scrollbar-thumb {
-    background: transparent;
+    background: #487eb0;
     border-radius: 1px;
   }
 }
@@ -72,8 +72,19 @@ body .city-basic {
   text-align: center;
 }
 
+body .city-basic #name {
+  font-family: "Raleway Medium";
+  font-size: 20px;
+}
+
 body .city-basic * {
   margin: 5px 0;
+}
+
+body .city-basic #weather_desc {
+  font-family: "Raleway Medium";
+  font-size: 20px;
+  margin: 0px;
 }
 
 body .buttons {
@@ -123,10 +134,13 @@ body .bottom {
 body .bottom .languages {
   position: absolute;
   left: 15px;
-  bottom: 10px;
+  top: 10px;
 }
 
 body .bottom .github {
+  position: absolute;
+  left: 20px;
+  bottom: 5px;
   text-align: center;
 }
 
@@ -274,6 +288,9 @@ header .title p {
           flex-direction: column;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  opacity: 0;
+  -webkit-transition: 0.7s ease;
+  transition: 0.7s ease;
   font-family: "Raleway Medium";
   color: #555555;
 }
@@ -297,16 +314,25 @@ header .title p {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  opacity: 1;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
 }
 
 .weather-data .forecast-container .forecast-box {
+  opacity: 0;
   padding: 10px;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: #ffffff;
+  color: #487eb0;
+  border-radius: 2px;
   -ms-flex-preferred-size: 20%;
       flex-basis: 20%;
   min-height: 200px;
-  margin: 0 0.5px;
+  margin: 0px;
+  -webkit-animation: testBox 0.3s ease-in-out forwards;
+          animation: testBox 0.3s ease-in-out forwards;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+  cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -322,14 +348,56 @@ header .title p {
           align-items: center;
 }
 
+.weather-data .forecast-container .forecast-box .forecast-data {
+  font-size: 14px;
+}
+
+.weather-data .forecast-container .forecast-box .forecast-data p {
+  margin: 5px 0;
+  font-family: "Raleway Medium";
+}
+
+.weather-data .forecast-container .forecast-box .forecast-data #day {
+  font-family: "Raleway Black";
+  font-size: 22px;
+  color: #00827c;
+}
+
 @media (max-width: 920px) {
   .weather-data .forecast-container .forecast-box {
     width: 250px;
   }
 }
 
-.weather-data .forecast-container .forecast-box:nth-child(1) {
-  background-color: #273c75;
+.weather-data .forecast-container .forecast-box:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  -webkit-box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+          box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.weather-data .forecast-container .forecast-box:nth-child(2) {
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s;
+}
+
+.weather-data .forecast-container .forecast-box:nth-child(3) {
+  -webkit-animation-delay: 0.6s;
+          animation-delay: 0.6s;
+}
+
+.weather-data .forecast-container .forecast-box:nth-child(4) {
+  -webkit-animation-delay: 0.9s;
+          animation-delay: 0.9s;
+}
+
+.weather-data .forecast-container .forecast-box:nth-child(5) {
+  -webkit-animation-delay: 1.2s;
+          animation-delay: 1.2s;
+}
+
+.weather-data .weather-data_current.activeCurrent {
+  opacity: 1;
 }
 
 @media (max-width: 920px) {
@@ -363,5 +431,23 @@ header .title p {
   /* Support for IE. */
   -webkit-font-feature-settings: 'liga';
           font-feature-settings: 'liga';
+}
+
+@-webkit-keyframes testBox {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes testBox {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 /*# sourceMappingURL=main.css.map */
