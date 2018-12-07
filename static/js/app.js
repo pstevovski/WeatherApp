@@ -1,5 +1,5 @@
-const weather = new Weather();
-const ui = new UI();
+import {weather} from "./weather.js";
+import {ui} from "./ui.js";
 
 const form = document.querySelector("#form");
 const inputField = document.querySelector("#inputField");
@@ -9,20 +9,9 @@ const buttons = document.querySelector(".buttons");
 const imperialBtn = document.querySelector("#fahrenheit");
 const metricBtn = document.querySelector("#celsius");
 const loader = document.querySelector(".loader");
-
-// Random loader icon
 const iconsArray = ["cloudy", "day", "night", "rainy-6", "snowy-6", "thunder"];
-function randomLoaderIcon() {
-    let min = 0;
-    let max = iconsArray.length;
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    const randomNum = Math.floor(Math.random() * (max - min)) + min;
 
-    const loaderIcon = document.querySelector(".loader img");
-    loaderIcon.setAttribute("src", `static/images/${iconsArray[randomNum]}.svg`);
-};
-
+// Search for a city
 form.addEventListener("submit", e => {
     const city = inputField.value;
 
@@ -135,12 +124,12 @@ currentBtn.addEventListener("click", ()=>{
 })
 
 // Metric units
-metricBtn.addEventListener("click", function(){
+metricBtn.addEventListener("click", () => {
     const city = inputField.value;
     const celsius = "°C";
 
     // Add / remove appropriate classes
-    this.classList.add("activeUnit");
+    metricBtn.classList.add("activeUnit");
     imperialBtn.classList.remove("activeUnit");
 
     // Display error notification if there's no value in the input field
@@ -163,12 +152,12 @@ metricBtn.addEventListener("click", function(){
 })
 
 // Imperial units
-document.querySelector("#fahrenheit").addEventListener("click", function(){
+imperialBtn.addEventListener("click", () => {
     const city = inputField.value;
     const fahrenheit = "°F";
 
-    // Add / remove appropriate classes
-    this.classList.add("activeUnit");
+    // // Add / remove appropriate classes
+    imperialBtn.classList.add("activeUnit");
     metricBtn.classList.remove("activeUnit");
 
     // Display error notification if theres no value in the input field
@@ -190,6 +179,18 @@ document.querySelector("#fahrenheit").addEventListener("click", function(){
     }
 })
 
+// Random loader icon
+function randomLoaderIcon() {
+    let min = 0;
+    let max = iconsArray.length;
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    const randomNum = Math.floor(Math.random() * (max - min)) + min;
+
+    const loaderIcon = document.querySelector(".loader img");
+    loaderIcon.setAttribute("src", `static/images/${iconsArray[randomNum]}.svg`);
+};
+
 // Check if input field is empty - if so, clear the data displayed
 inputField.addEventListener("keyup", function() {
     if(this.value === "") {
@@ -201,11 +202,12 @@ inputField.addEventListener("keyup", function() {
     }
 })
 
-/* 
-Add: 
-- Add an error notification if user hasn't entered a city name - done
-- Translate the forecast date into a week's day - done
-- Add an icon in the title
-- Add about modal
-- Add loader when loading weather data - done
-*/
+// Open and close About modal
+const about = document.querySelector(".about-container");
+document.querySelector("#about").addEventListener("click", () => {
+    about.style.display = "block";
+})
+
+document.querySelector("#closeAbout").addEventListener("click", () => {
+    about.style.display = "none";
+})
