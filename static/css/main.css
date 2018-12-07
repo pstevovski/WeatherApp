@@ -7,7 +7,7 @@
 
 body {
   background-color: #f5f5f5;
-  /* Spinner */
+  /* Loader */
 }
 
 body .container {
@@ -46,6 +46,16 @@ body .container a:hover {
   body .container ::-webkit-scrollbar-thumb {
     background: #487eb0;
     border-radius: 1px;
+  }
+}
+
+@media (max-width: 600px) {
+  body .container {
+    top: 0px;
+    margin: 0;
+    border-radius: 0px;
+    width: 100%;
+    min-height: 615px;
   }
 }
 
@@ -95,7 +105,7 @@ body .city-basic #weather_desc {
   color: #487eb0;
 }
 
-body .spinner {
+body .loader {
   display: none;
   position: absolute;
   top: 50%;
@@ -135,6 +145,12 @@ body .buttons button:hover {
 body .buttons .activeButton {
   background-color: #487eb0;
   color: #ffffff;
+}
+
+@media (max-width: 600px) {
+  body .buttons {
+    margin-bottom: 130px;
+  }
 }
 
 body .units {
@@ -231,7 +247,8 @@ body .bottom #about {
 
 @media (max-width: 600px) {
   body .bottom {
-    position: relative;
+    position: fixed;
+    bottom: 0px;
     margin-top: 30px;
     display: -ms-grid;
     display: grid;
@@ -455,6 +472,12 @@ header .title p {
 .weather-data .forecast-container .forecast-box .forecast-data #day-date {
   font-size: 14px;
   color: #22222270;
+}
+
+@media (max-width: 600px) {
+  .weather-data .forecast-container .forecast-box .forecast-data {
+    font-size: 18px;
+  }
 }
 
 @media (max-width: 920px) {

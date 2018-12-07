@@ -87,6 +87,14 @@ body {
             }
         }
 
+        @include midScreen {
+            top: 0px;
+            margin: 0;
+            border-radius: 0px;
+            width: 100%;
+            min-height: 615px;
+        }
+
         @include mobile {
             top: 0px;
             width: 100%;
@@ -127,30 +135,14 @@ body {
          }
     }
 
-    /* Spinner */
-    .spinner {
+    /* Loader */
+    .loader {
         display: none;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
     }
-    // .spinner:before{
-    //     content: '';
-    //     box-sizing: border-box;
-    //     position: absolute;
-    //     top: 50%;
-    //     left: 50%;
-    //     transform:translate(-50%,-50%);
-    //     height:25px;
-    //     width: 25px;
-    //     border-radius: 50%;
-    //     margin-top: -20px;
-    //     border: 2px solid transparent;
-    //     border-top-color: #e1302a;
-    //     border-bottom-color: #2f3640;
-    //     animation: spinner 0.5s ease infinite;
-    // }
 
     // Buttons
     .buttons {
@@ -179,6 +171,10 @@ body {
         .activeButton {
             background-color:color(secondary);
             color: color(primary);
+        }
+
+        @include midScreen {
+            margin-bottom: 130px;
         }
     }
 
@@ -249,8 +245,8 @@ body {
         }
 
         @include midScreen {
-            position: relative;
-            // bottom: -3000px;
+            position: fixed;
+            bottom: 0px;
             margin-top: 30px;
 
             display: grid;
@@ -415,6 +411,10 @@ header {
                 #day-date {
                     font-size: 14px;
                     color: color(placeholderColor);
+                }
+
+                @include midScreen {
+                    font-size: 18px;
                 }
             }
 
