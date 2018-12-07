@@ -10,6 +10,7 @@ class UI {
         this.sign = "°C";
         this.locale = "en-GB";
     }
+    
     // Change sign - celsius or fahrenheit
     changeSign(sign) {
         this.sign = sign;
@@ -35,7 +36,7 @@ class UI {
         // Weather description
         this.weather_desc.textContent = `${data.weather[0].main}`;
 
-        // Floor temeperature data
+        // Floor temeperature data to a whole number
         const temp = Math.floor(data.main.temp);
         const temp_min = Math.floor(data.main.temp_min);
         const temp_max = Math.floor(data.main.temp_max);
@@ -248,3 +249,5 @@ class UI {
         this.name.textContent = "";
     }
 }
+
+export const ui = new UI();
