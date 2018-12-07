@@ -261,6 +261,59 @@ body .bottom #about {
   }
 }
 
+body .about-container {
+  display: none;
+  width: 60%;
+  height: auto;
+  padding: 20px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -40%);
+          transform: translate(-50%, -40%);
+  background-color: #ffffff;
+  -webkit-box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+body .about-container h2 {
+  font-family: "Paytone One";
+  font-size: 30px;
+  text-align: center;
+  color: #487eb0;
+}
+
+body .about-container p {
+  font-family: "Raleway Regular";
+  font-size: 18px;
+  text-align: center;
+}
+
+body .about-container p span {
+  color: #00827c;
+  font-family: "Raleway Medium";
+}
+
+body .about-container a {
+  color: #487eb0;
+}
+
+body .about-container #closeAbout {
+  display: block;
+  margin: 10px 0;
+  font-family: "Raleway Medium";
+  font-size: 18px;
+  color: #c23616;
+  cursor: pointer;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  body .about-container {
+    width: 80%;
+  }
+}
+
 header {
   width: 100%;
   display: -webkit-box;
@@ -335,6 +388,10 @@ header .title p {
   transition: 0.4s ease;
 }
 
+.search-bar #form input:focus {
+  border: 1px solid #487eb0;
+}
+
 .search-bar #form input::-webkit-input-placeholder {
   font-family: "Raleway Regular";
   color: #22222270;
@@ -362,9 +419,12 @@ header .title p {
   color: #22222270;
   -webkit-transform: rotateZ(0deg);
           transform: rotateZ(0deg);
-  cursor: pointer;
   -webkit-transition: 0.4s ease;
   transition: 0.4s ease;
+}
+
+.search-bar #form input:focus ~ #search-icon {
+  color: #487eb0;
 }
 
 .weather-data {
@@ -474,15 +534,12 @@ header .title p {
   color: #22222270;
 }
 
-@media (max-width: 600px) {
-  .weather-data .forecast-container .forecast-box .forecast-data {
-    font-size: 18px;
-  }
-}
-
 @media (max-width: 920px) {
   .weather-data .forecast-container .forecast-box {
     width: 250px;
+  }
+  .weather-data .forecast-container .forecast-box .forecast-data {
+    font-size: 18px;
   }
 }
 
@@ -565,28 +622,6 @@ header .title p {
   }
   100% {
     opacity: 1;
-  }
-}
-
-@-webkit-keyframes spinner {
-  from {
-    -webkit-transform: translate(-50%, -50%) rotate(0deg);
-            transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    -webkit-transform: translate(-50%, -50%) rotate(360deg);
-            transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
-@keyframes spinner {
-  from {
-    -webkit-transform: translate(-50%, -50%) rotate(0deg);
-            transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    -webkit-transform: translate(-50%, -50%) rotate(360deg);
-            transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 /*# sourceMappingURL=main.css.map */

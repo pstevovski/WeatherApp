@@ -17,6 +17,7 @@ $colors: (
 $center: translate(-50%, -50%);
 $mainFont: "Paytone One";
 $textFont: "Raleway Regular";
+$mediumFont: "Raleway Medium";
 
 * {
     margin: 0;
@@ -24,9 +25,10 @@ $textFont: "Raleway Regular";
     box-sizing: border-box;
 }
 
+// Screen sizes
 $smallerScreen: 920px;
-$mobile: 500px;
 $midScreen: 600px;
+$mobile: 500px;
 
 @mixin smallerScreen {
     @media (max-width: #{$smallerScreen}) {
@@ -34,14 +36,14 @@ $midScreen: 600px;
     }
 }
 
-@mixin mobile {
-    @media (max-width: #{$mobile}) {
+@mixin midScreen {
+    @media (max-width: #{$midScreen}) {
         @content;
     }
 }
 
-@mixin midScreen {
-    @media (max-width: #{$midScreen}) {
+@mixin mobile {
+    @media (max-width: #{$mobile}) {
         @content;
     }
 }
@@ -68,7 +70,7 @@ body {
         a {
             text-decoration: none;
             color: color(placeholderColor);
-            font-family: "Raleway Medium";
+            font-family: $mediumFont;
             transition: 0.15s ease;
         }
 
@@ -102,6 +104,7 @@ body {
             border-radius: 0px;
             margin: 0;
         }
+
     }
 
     // City basic info
@@ -112,7 +115,7 @@ body {
         text-align: center;
 
         #name {
-            font-family: "Raleway Medium";
+            font-family: $mediumFont;
             font-size: 22px;
             color: color(dayColor);
         }
@@ -128,7 +131,7 @@ body {
 
 
         #weather_desc {
-            font-family: "Raleway Medium";
+            font-family: $mediumFont;
             font-size: 20px;
             margin: 0px;
             color: color(secondary);
@@ -158,7 +161,7 @@ body {
             margin: 0 3px;
             background-color: color(primary);
             color: color(textColor);
-            font-family: "Raleway Medium";
+            font-family: $mediumFont;
             cursor: pointer;
             outline: none;
             transition: 0.2s ease;
@@ -231,7 +234,7 @@ body {
 
             p {
                 margin-left: 5px;
-                font-family: "Raleway Medium";
+                font-family: $mediumFont;
                 font-size: 14px;
                 color: color(placeholderColor);
             }
@@ -259,6 +262,57 @@ body {
             * {
                 margin: 5px 0;
             }
+        }
+    }
+
+    
+    // About
+    .about-container {
+        display: none;
+        width: 60%;
+        height: auto;
+        padding: 20px;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -40%);
+        background-color: color(primary);
+        box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+
+        h2 {
+            font-family: $mainFont;
+            font-size: 30px;
+            text-align: center;
+            color: color(secondary);
+        }
+
+        p {
+            font-family: $textFont;
+            font-size: 18px;
+            text-align: center;
+
+            span {
+                color: color(dayColor);
+                font-family: $mediumFont;
+            }
+        }
+
+        a {
+            color: color(secondary);
+        }
+
+        #closeAbout {
+            display: block;
+            margin: 10px 0;
+            font-family: $mediumFont;
+            font-size: 18px;
+            color: color(hoverColor);
+            cursor: pointer;
+            text-align: center;
+        }
+
+        @include midScreen {
+            width: 80%;
         }
     }
 }
@@ -300,7 +354,6 @@ header {
 .search-bar {
     max-width: 450px;
     margin: 0 auto;
-    // background-color: red;
 
     #form {
         display: flex;
@@ -314,9 +367,13 @@ header {
             margin: 15px 0;
             border-radius: 20px;
             border: 1px solid rgba(0,0,0,0.2);
-            font-family: "Raleway Medium";
+            font-family: $mediumFont;
             outline: none;
             transition: 0.4s ease;
+        }
+
+        input:focus {
+            border: 1px solid color(secondary);
         }
 
         input::placeholder {
@@ -330,8 +387,11 @@ header {
             font-size: 25px;
             color: color(placeholderColor);
             transform:rotateZ(0deg);
-            cursor: pointer;
             transition: 0.4s ease;
+        }
+
+        input:focus ~ #search-icon{
+            color: color(secondary);
         }
     }
 }
@@ -355,11 +415,11 @@ header {
         opacity: 0;
         transition: 0.7s ease;
 
-        font-family: "Raleway Medium";
+        font-family: $mediumFont;
         color: #555555;
 
         .numerals {
-            font-family: "Raleway Medium";
+            font-family: $mediumFont;
             font-size: 20px;
             color: color(secondary);
         }
@@ -398,7 +458,7 @@ header {
 
                 p {
                     margin: 5px 0;
-                    font-family: "Raleway Medium";
+                    font-family: $mediumFont;
 
                 }
 
@@ -412,14 +472,14 @@ header {
                     font-size: 14px;
                     color: color(placeholderColor);
                 }
-
-                @include midScreen {
-                    font-size: 18px;
-                }
             }
 
             @include smallerScreen {
                 width: 250px;
+                
+                .forecast-data {
+                    font-size: 18px;
+                }
             }
         }
         .forecast-box:hover {
@@ -483,14 +543,5 @@ header {
     }
     100%{
         opacity: 1;
-    }
-}
-
-@keyframes spinner{
-    from{
-        transform:translate(-50%,-50%) rotate(0deg);
-    }
-    to{
-        transform:translate(-50%,-50%) rotate(360deg);
     }
 }

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>WeatherApp</title>
     <link rel="stylesheet" href="static/css/main.css">
+    <link rel="shortcut icon" type="image/x-icon" href="static/images/favicon.png">
 </head>
 <body>
     <div class="container">
@@ -51,6 +52,7 @@
             <button id="forecast">FORECAST</button>
         </div>
 
+        <!-- Bottom section -->
         <div class="bottom">
             <!-- GitHub link -->
             <div class="github">
@@ -65,13 +67,17 @@
             </div>
 
             <a href="#" id="about">about</a>
-            <!-- CREDITS -->
-            <!-- https://www.amcharts.com/free-animated-svg-weather-icons/ -->
+        </div>
+
+        <!-- About modal -->
+        <div class="about-container">
+            <h2>About</h2>
+            <p>This is a learning project that uses the <a href="https://openweathermap.org" target="_blank" title="Open Weather Map">openweathermap's API</a> to provide current weather data and forecast for the next 5 days. Technologies used: <span>HTML / SCSS / JavaScript.</span> Custom weather icons provided by: <a href="https://www.amcharts.com/free-animated-svg-weather-icons/" target="_blank" title="Amcharts">amcharts</a>.</p>
+
+            <a id="closeAbout">Close</a>
         </div>
     </div>
 
-    <script src="static/js/weather.js"></script>
-    <script src="static/js/ui.js"></script>
-    <script src="static/js/app.js"></script>
+    <script type="module" src="static/js/app.js"></script>
 </body>
 </html>
