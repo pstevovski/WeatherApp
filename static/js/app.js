@@ -10,10 +10,10 @@ const imperialBtn = document.querySelector("#fahrenheit");
 const metricBtn = document.querySelector("#celsius");
 const loader = document.querySelector(".loader");
 
-// Initialize coordinates variable
+// INITIALIZE COORDINATES VARIABLE
 let coords;
 
-// When page is loaded, check if there are coordinates in LS, if not then prompt the user
+// CHECK IF THERE ARE COORDINATES IN LS, IF NOT PROMPT THE USER
 document.addEventListener("DOMContentLoaded", ()=>{
     coords = JSON.parse(localStorage.getItem("coords"));
     // If there is coords in local storage, display data
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
 })
 
-// Gets the coordinates for the user if the user allows Locations
+// GET COORDINATES IF USER ALLOWS
 function getCoordinates(data) {
     const coordinates = {
         latitude: Math.floor(data.coords.latitude),
@@ -37,7 +37,7 @@ function getCoordinates(data) {
     coordinatesData(coordinates);
 }
 
-// Displays current weather data based on the coords (saved or first-time allowed)
+// DISPLAY CURRENT WEATHER DATA BASED ON COORDINATES (saved or first-time allowed)
 function coordinatesData(coords) {
     // Get the saved coordinates
     coords = JSON.parse(localStorage.getItem("coords"));
@@ -68,7 +68,7 @@ function coordinatesData(coords) {
     ui.clearPreviousData();
 }
 
-// Search for a city
+// SEARCH FOR A CITY
 form.addEventListener("submit", e => {
     const city = inputField.value;
 
@@ -91,7 +91,7 @@ form.addEventListener("submit", e => {
     e.preventDefault();
 })
 
-// Get current weather
+// GET CURRENT WEATHER FOR A CITY
 function current(city) {
     // Display loader and hide buttons (if they were displayed)
     loader.style.display = "block";
@@ -123,9 +123,12 @@ function current(city) {
     ui.clearPreviousData();
 }
 
-// Get the forecast
+// GET THE FORECAST FOR A CITY
 forecastBtn.addEventListener("click", ()=>{
     const city = inputField.value;
+    
+    // Get the saved coordinates
+    coords = JSON.parse(localStorage.getItem("coords"));
 
     // Get a random loader icon
     ui.randomLoaderIcon();
@@ -169,21 +172,24 @@ forecastBtn.addEventListener("click", ()=>{
             // Display the buttons again
             buttons.style.display = "flex";
         })
-
-        // Mark the active button
-        forecastBtn.classList.add("activeButton");
-        currentBtn.classList.remove("activeButton");
     }
+
+    // Mark the active button
+    forecastBtn.classList.add("activeButton");
+    currentBtn.classList.remove("activeButton");
 
     // Clear previous data
     ui.clearPreviousData();
 })
 
-// Get the current weather
+// GET THE CURRENT WEATHER DATA
 currentBtn.addEventListener("click", ()=>{
     const city = inputField.value;
 
-    // Display error notification if there's no value in the input field
+    // Get the saved coordinates
+    coords = JSON.parse(localStorage.getItem("coords"));
+
+    // If there are saved coordinates and input field is empty
     if(coords && !city) {
         // Get the current weather based on the saved coordinates 
         coordinatesData(coords);
@@ -196,16 +202,16 @@ currentBtn.addEventListener("click", ()=>{
         // Get current city's weather data
         current(city);
 
-        // Mark the active button
-        currentBtn.classList.add("activeButton");
-        forecastBtn.classList.remove("activeButton");
     }
+    // Mark the active button
+    currentBtn.classList.add("activeButton");
+    forecastBtn.classList.remove("activeButton");
 
     // Clear previous data
     ui.clearPreviousData();
 })
 
-// Get metric units
+// SWITCH TO METRIC UNITS
 function metricUnits(celsius) {
     // Get random loader icon
     ui.randomLoaderIcon();
@@ -217,8 +223,6 @@ function metricUnits(celsius) {
     // Change the temperature degrees sign
     ui.changeSign(celsius);
 }
-
-// Metric units
 metricBtn.addEventListener("click", () => {
     const city = inputField.value;
     const celsius = "°C";
@@ -245,6 +249,7 @@ metricBtn.addEventListener("click", () => {
     }
 })
 
+// SWITCH TO IMPERIAL UNITS
 function imperialUnits(fahrenheit) {
     // Get random loader icon
     ui.randomLoaderIcon();
@@ -256,8 +261,6 @@ function imperialUnits(fahrenheit) {
     // Change the temperature degrees sign
     ui.changeSign(fahrenheit);
 }
-
-// Imperial units
 imperialBtn.addEventListener("click", () => {
     const city = inputField.value;
     const fahrenheit = "°F";
@@ -284,7 +287,7 @@ imperialBtn.addEventListener("click", () => {
     }
 })
 
-// Check if input field is empty - if so, clear the data displayed
+// IF INPUT FIELD IS EMPTY - CLEAR DATA
 inputField.addEventListener("keyup", function() {
     if(this.value === "") {
         // Clear the UI
@@ -295,7 +298,7 @@ inputField.addEventListener("keyup", function() {
     }
 })
 
-// Open and close About modal
+// OPEN AND CLOSE "ABOUT" MODAL
 const about = document.querySelector(".about-container");
 document.querySelector("#about").addEventListener("click", () => {
     about.style.display = "block";
