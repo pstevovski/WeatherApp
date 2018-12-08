@@ -232,7 +232,7 @@ metricBtn.addEventListener("click", () => {
     imperialBtn.classList.remove("activeUnit");
 
     // Display error notification if there's no value in the input field
-    if(coords) {
+    if(coords && !city) {
         // Change to metric units
         metricUnits(celsius);
 
@@ -270,7 +270,7 @@ imperialBtn.addEventListener("click", () => {
     metricBtn.classList.remove("activeUnit");
 
     // Display error notification if theres no value in the input field
-    if(coords) {
+    if(coords && !city) {
         // Change to imperial units
         imperialUnits(fahrenheit);
 
