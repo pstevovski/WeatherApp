@@ -292,9 +292,12 @@ inputField.addEventListener("keyup", function() {
     if(this.value === "") {
         // Clear the UI
         ui.clearUI();
+        
+        // Get the saved coords from local storage
+        coords = JSON.parse(localStorage.getItem("coords"));
 
-        // Hide the buttons
-        buttons.style.display = "none";
+        // Get the saved location current weather data
+        coordinatesData(coords);
     }
 })
 
