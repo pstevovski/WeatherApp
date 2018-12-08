@@ -21,6 +21,24 @@ class Weather {
 
         return forecastData;
     }
+
+    // Get current weather using coordinates
+    async getCurrentByCoords(coords) {
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${coords.latitude}&lon=${coords.longitude}&units=${this.units}&APPID=${this.key}`);
+
+        const responseData = await response.json();
+
+        return responseData;
+    }
+
+    // Get forecast data by coordinates
+    async getForecastByCoords(coords) {
+        const forecast = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${coords.latitude}&lon=${coords.longitude}&units=${this.units}&APPID=${this.key}`)
+
+        const forecastData = await forecast.json();
+
+        return forecastData;
+    }
 }
 
 export const weather = new Weather();
