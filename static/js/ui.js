@@ -9,7 +9,21 @@ class UI {
         this.units = document.querySelector(".units");
         this.sign = "°C";
         this.locale = "en-GB";
+        this.iconsArray = ["cloudy", "day", "night", "rainy-6", "snowy-6", "thunder"];
+        this.direction;
     }
+
+    // Get a random loader weather icon
+    randomLoaderIcon() {
+        let min = 0;
+        let max = this.iconsArray.length;
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        const randomNum = Math.floor(Math.random() * (max - min)) + min;
+    
+        const loaderIcon = document.querySelector(".loader img");
+        loaderIcon.setAttribute("src", `static/images/${this.iconsArray[randomNum]}.svg`);
+    };
     
     // Change sign - celsius or fahrenheit
     changeSign(sign) {
@@ -23,6 +37,7 @@ class UI {
         this.weather_icon.setAttribute("src", "");
         this.weather_icon.setAttribute("width", "");
         this.weather_icon.setAttribute("height", "");
+        this.weather_icon.setAttribute("alt", "");
     }
 
     // Display city's current weather data
@@ -42,9 +57,38 @@ class UI {
         const temp_max = Math.floor(data.main.temp_max);
         const windSpeed = Math.floor(data.wind.speed);
 
-        // Visibility
-        const visibility = data.visibility.toLocaleString(this.locale);
+        // Get wind's direction
+        const windDegrees = Math.floor(data.wind.deg);
 
+        // Compare the wind degrees with a pre-set value to determine wind direction
+        switch(true) {
+            case windDegrees <= 45:
+                this.direction = "N";
+                break;
+            case windDegrees <= 90:
+                this.direction = "NE";
+                break;
+            case windDegrees <= 135:
+                this.direction = "E";
+                break;
+            case windDegrees <= 180:
+                this.direction = "SE";
+                break;
+            case windDegrees <= 225:
+                this.direction = "S";
+                break;
+            case windDegrees <= 270:
+                this.direction = "SW";
+                break;
+            case windDegrees <= 315:
+                this.direction = "W";
+                break;
+            case windDegrees <= 360:
+                this.direction = "NW";
+                break;
+        }
+
+        // Display the data
         this.weather.innerHTML = `
         <div class="weather-data_current">
             <p>Current temperature: <span class="numerals">${temp} ${this.sign}</span></p>
@@ -52,8 +96,8 @@ class UI {
             <p>Max. temperature: <span class="numerals">${temp_max} ${this.sign}</span></p>
             <p>Atmospheric preassure: <span class="numerals">${data.main.pressure} hPa </span></p>
             <p>Humidity: <span class="numerals">${data.main.humidity} %</span></p>
-            <p>Wind speed: <span class="numerals">${windSpeed} km/h</span></p>
-            <p>Visibility: <span class="numerals">${visibility} m</span></p>
+            <p>Wind: <span class="numerals">${windSpeed} km/h, ${this.direction}</span></p>
+
         </div>
         `;
 
@@ -77,22 +121,27 @@ class UI {
             // Thunderstorm icon
             case 2:
                 this.weather_icon.setAttribute("src", "static/images/thunder.svg");
+                this.weather_icon.setAttribute("alt", "Thunder");
                 break;
             // Drizzle (light rain) icon
             case 3:
                 this.weather_icon.setAttribute("src", "static/images/rainy-4.svg");
+                this.weather_icon.setAttribute("alt", "Drizzle");
                 break;
             // Rain icon
             case 5:
                 this.weather_icon.setAttribute("src", "static/images/rainy-6.svg");
+                this.weather_icon.setAttribute("alt", "Rainy");
                 break;
             // Snow icon
             case 6:
                 this.weather_icon.setAttribute("src", "static/images/snowy-6.svg");
+                this.weather_icon.setAttribute("alt", "Snow");
                 break;
             // Atmoshpere icon
             case 7:
                 this.weather_icon.setAttribute("src", "static/images/mist.svg");
+                this.weather_icon.setAttribute("alt", "Atmosphere icon");
                 break;
         }
 
@@ -100,8 +149,10 @@ class UI {
         if(iconId === 800) {
             if(icon === "day") {
                 this.weather_icon.setAttribute("src", "static/images/day.svg");
+                this.weather_icon.setAttribute("alt", "Clear Day");
             } else if(icon === "night") {
                 this.weather_icon.setAttribute("src", "static/images/night.svg")
+                this.weather_icon.setAttribute("alt", "Clear Night");
             };
         }
 
@@ -109,12 +160,15 @@ class UI {
         if(iconId === 801) {
             if(icon === "day") {
                 this.weather_icon.setAttribute("src", "static/images/cloudy-day-3.svg");
+                this.weather_icon.setAttribute("alt", "Cloudy Day");
             } else if(icon === "night") {
                 this.weather_icon.setAttribute("src", "static/images/cloudy-night-3.svg")
+                this.weather_icon.setAttribute("alt", "Cloudy Night");
             };
         } else if(iconId === 802 || iconId === 803 || iconId === 804) {
             // If its overcast or cloudy
             this.weather_icon.setAttribute("src", "static/images/cloudy.svg");
+            this.weather_icon.setAttribute("alt", "Overcast");
         }
 
         // Set the width and height of the weather icon
@@ -230,8 +284,12 @@ class UI {
     }
 
     // Display error notification
-    error() {
+    error(notFound) {
         this.notification.style.display = "flex";
+
+        if(notFound) {
+            document.querySelector(".error p").textContent = notFound;
+        }
 
         setTimeout(() => {
             this.notification.style.display = "none";
@@ -246,6 +304,7 @@ class UI {
         this.weather_icon.setAttribute("src", "");
         this.weather_icon.setAttribute("width", "");
         this.weather_icon.setAttribute("height", "");
+        this.weather_icon.setAttribute("alt", "");
         this.name.textContent = "";
     }
 }
